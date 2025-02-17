@@ -15,8 +15,8 @@ type Service struct {
 	Repo  repository.Repository
 }
 
-func NewService(tg telegram.Telegram, email email.Email, repo repository.Repository) *Service {
-	return &Service{tg, email, repo}
+func NewService(tg *telegram.Telegram, email *email.Email, repo *repository.Repository) *Service {
+	return &Service{*tg, *email, *repo}
 }
 
 func (s *Service) SendNotifications(ctx context.Context, userID int, message string) error {

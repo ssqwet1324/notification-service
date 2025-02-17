@@ -18,7 +18,7 @@ func NewNotificationController(service *service.Service) *NotificationController
 
 // CreateNotificationHandler - обработчик создания уведомления
 func (nc *NotificationController) CreateNotificationHandler(c *gin.Context) {
-	var req models.Notification
+	var req models.СreateNotificationRequest
 
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})

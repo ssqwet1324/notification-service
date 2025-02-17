@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/jackc/pgx/v5/pgxpool"
 	"log"
+	"service_notification/internal/config"
 )
 
 // Repository отвечает за работу с БД
@@ -18,8 +19,8 @@ type UserInfoDBO struct {
 	TelegramUserID int
 }
 
-func NewRepository() *Repository {
-	dsn := "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable"
+func NewRepository(cfg *config.Config) *Repository {
+	dsn := fmt.Sprintf("postgres://%s:%s@%s:%d/%s?sslmode=disable", cfg.DbName, cfg.DbPassword, cfg.DbHost, cfg.DbPort, "postgres")
 	dbPool, err := pgxpool.New(context.Background(), dsn)
 	if err != nil {
 		log.Fatal("Error connecting to DB:", err)

@@ -4,14 +4,15 @@ import (
 	"fmt"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"log"
+	"service_notification/internal/config"
 )
 
 type Telegram struct {
 	TelegramToken string
 }
 
-func NewTelegram(telegram_token string) *Telegram {
-	return &Telegram{telegram_token}
+func NewTelegram(cfg *config.Config) *Telegram {
+	return &Telegram{cfg.TelegramToken}
 }
 
 func (tg *Telegram) Send(chatId int64, message string) error {
