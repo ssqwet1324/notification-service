@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/smtp"
+	"service_notification/internal/config"
+	"strconv"
 	"strings"
 )
 
@@ -15,13 +17,13 @@ type Email struct {
 	Auth     smtp.Auth
 }
 
-func NewEmail(email, password, host, port string) *Email {
-	auth := smtp.PlainAuth("", email, password, host)
+func NewEmail(cfg *config.Config) *Email {
+	auth := smtp.PlainAuth("", cfg.SMTPEmail, cfg.SMTPPassword, cfg.SMTPHost)
 	return &Email{
-		email,
-		password,
-		host,
-		port,
+		cfg.SMTPEmail,
+		cfg.SMTPPassword,
+		cfg.SMTPHost,
+		strconv.Itoa(cfg.SMTPPort),
 		auth}
 }
 

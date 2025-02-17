@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/gin-gonic/gin"
 	"log"
+	"service_notification/internal/config"
 	_ "service_notification/internal/controller"
 	controllers "service_notification/internal/controller"
 	"service_notification/internal/email"
@@ -14,15 +15,20 @@ import (
 )
 
 func main() {
+	cfg, err := config.NewConfig()
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// Инициализация репозитория
-	repo := repository.NewRepository()
+	repo := repository.NewRepository(cfg)
 
-	telega := telegram.NewTelegram("yourToken")
+	telega := telegram.NewTelegram(cfg)
 
-	email := email.NewEmail("your email", "password", "host", "port")
+	email := email.NewEmail(cfg)
 
-	service := services.NewService(*telega, *email, *repo)
+	service := services.NewService(telega, email, repo)
 
 	controller := controllers.NewNotificationController(service)
 
@@ -30,7 +36,7 @@ func main() {
 
 	ctx := context.Background()
 
-	err := migration.InitTables(ctx)
+	err = migration.InitTables(ctx)
 	if err != nil {
 		log.Fatal("Error creating table", err)
 	}
