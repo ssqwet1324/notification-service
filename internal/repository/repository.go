@@ -20,7 +20,8 @@ type UserInfoDBO struct {
 }
 
 func NewRepository(cfg *config.Config) *Repository {
-	dsn := fmt.Sprintf("postgres://%s:%s@%s:%d/%s?sslmode=disable", cfg.DbName, cfg.DbPassword, cfg.DbHost, cfg.DbPort, "postgres")
+	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", cfg.DbUser, cfg.DbPassword, cfg.DbHost, cfg.DbPort, cfg.DbName)
+
 	dbPool, err := pgxpool.New(context.Background(), dsn)
 	if err != nil {
 		log.Fatal("Error connecting to DB:", err)
