@@ -8,16 +8,18 @@ import (
 )
 
 type Config struct {
-	DbName        string `env:"DB_NAME"`
-	DbUser        string `env:"DB_USER"`
-	DbPassword    string `env:"DB_PASSWORD"`
-	DbHost        string `env:"DB_HOST"`
-	DbPort        int    `env:"DB_PORT"`
-	TelegramToken string `env:"TELEGRAM_TOKEN"`
-	SMTPEmail     string `env:"SMTP_EMAIL"`
-	SMTPPassword  string `env:"SMTP_PASSWORD"`
-	SMTPHost      string `env:"SMTP_HOST"`
-	SMTPPort      int    `env:"SMTP_PORT"`
+	DbName         string `env:"DB_NAME"`
+	DbUser         string `env:"DB_USER"`
+	DbPassword     string `env:"DB_PASSWORD"`
+	DbHost         string `env:"DB_HOST"`
+	DbPort         int    `env:"DB_PORT"`
+	TelegramToken  string `env:"TELEGRAM_TOKEN"`
+	SMTPEmail      string `env:"SMTP_EMAIL"`
+	SMTPPassword   string `env:"SMTP_PASSWORD"`
+	SMTPHost       string `env:"SMTP_HOST"`
+	SMTPPort       int    `env:"SMTP_PORT"`
+	TestUserMail   string `env:"TEST_USER_EMAIL"`
+	TelegramChatID string `env:"TELEGRAM_CHAT_ID"`
 }
 
 func NewConfig() (*Config, error) {
@@ -37,6 +39,8 @@ func NewConfig() (*Config, error) {
 	cfg.SMTPPassword = os.Getenv("SMTP_PASSWORD")
 	cfg.SMTPHost = os.Getenv("SMTP_HOST")
 	cfg.SMTPPort, _ = strconv.Atoi(os.Getenv("SMTP_PORT"))
+	cfg.TestUserMail = os.Getenv("TEST_USER_EMAIL")
+	cfg.TelegramChatID = os.Getenv("TELEGRAM_CHAT_ID")
 
 	return &cfg, nil
 }
