@@ -36,7 +36,7 @@ func main() {
 
 	ctx := context.Background()
 
-	err = migration.InitTables(ctx)
+	err = migration.InitTables(ctx, cfg)
 	if err != nil {
 		log.Fatal("Error creating table", err)
 	}
