@@ -13,8 +13,9 @@ https://github.com/ssqwet1324/notification-service.git
 
 Change the data for the database if necessary.
 
-## Go to the file .env and sign your data for the database, mail and telegram token, SMTP, host
+## Go to the file .env and sign your data for the database, mail and telegram token, SMTP, host, testEmail, chatId
 
+![alt text](https://i.imgur.com/dBHmItk.png)
 
 ## Run the code and go to postman
 
