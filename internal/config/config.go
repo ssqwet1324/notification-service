@@ -9,6 +9,7 @@ import (
 
 type Config struct {
 	DbName        string `env:"DB_NAME"`
+	DbUser        string `env:"DB_USER"`
 	DbPassword    string `env:"DB_PASSWORD"`
 	DbHost        string `env:"DB_HOST"`
 	DbPort        int    `env:"DB_PORT"`
@@ -27,6 +28,7 @@ func NewConfig() (*Config, error) {
 	}
 
 	cfg.DbName = os.Getenv("DB_NAME")
+	cfg.DbUser = os.Getenv("DB_USER")
 	cfg.DbPassword = os.Getenv("DB_PASSWORD")
 	cfg.DbHost = os.Getenv("DB_HOST")
 	cfg.DbPort, _ = strconv.Atoi(os.Getenv("DB_PORT"))
